@@ -59,12 +59,12 @@ async function generateQr() {
 
 </script>
 
-<template>
+<template >
   <div class="bg-gray-100 min-h-lvh -z-10 absolute top-0 left-0 w-[100vw] flex justify-center items-center"> >
-    <img src="../public/icon.png" alt="logo" class=" blur-xl w-2/3" />
+    <img src="../public/icon.png" alt="logo" class=" blur-xl w-1/2" />
   </div>
 
-  <div class="z-100 max-h-lvh  w-[80vw]  flex flex-col items-center justify-start pt-60 p-6 bg-white/25 backdrop-blur-xl">
+  <div class="z-100 max-h-lvh  w-[80vw]  flex flex-col items-center justify-center pt-60 p-6 bg-white/25 backdrop-blur-xl">
     <h1 class="text-2xl font-bold mb-4">QR-code Generator</h1>
     <form @submit.prevent="generateQr" class="flex flex-col j gap-10 space-y-4 w-full max-w-sm">
       <input
