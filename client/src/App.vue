@@ -2,7 +2,7 @@
 import {ref} from 'vue'
 import axios from 'axios'
 
-const apiUrl = import.meta.env.VITE_API_URL;
+
 
 
 const wait = ref<boolean>(false)
@@ -30,7 +30,7 @@ async function generateQr() {
   if (logo.value) formData.append('logo', logo.value)
 
   try {
-    const response = await axios.post(`${apiUrl}/generate-qr/`, formData, {
+    const response = await axios.post(`${import.meta.env.VITE_API_URL}/generate-qr`, formData, {
       responseType: 'blob',
     })
 

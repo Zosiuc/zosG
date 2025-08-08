@@ -6,24 +6,26 @@ from fastapi.middleware.cors import CORSMiddleware
 from PIL import Image, ImageDraw
 import qrcode
 
-
 from starlette.responses import JSONResponse
 
 app = FastAPI()
 
-# CORS configuratie
 app.add_middleware(
 
     CORSMiddleware,
-    allow_origins=["http://localhost:5173","https://zos-8gweknuj3-zodiucs-projects.vercel.app"],
+    allow_origins=[
+        "http://localhost:5173",
+        "https://zos-8gweknuj3-zodiucs-projects.vercel.app"
+    ],
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["POST"],
     allow_headers=["*"],
 )
 
 
 @app.post("/generate-qr/")
 async def generate_qr(data: str = Form(...), logo: UploadFile = None):
+    print("QR request ontvangen")
     try:
         qr = qrcode.QRCode(
             error_correction=qrcode.constants.ERROR_CORRECT_H,
