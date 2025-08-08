@@ -30,9 +30,10 @@ async function generateQr() {
   if (logo.value) formData.append('logo', logo.value)
 
   try {
-    const response = await axios.post(`${import.meta.env.VITE_API_URL}/generate-qr`, formData, {
+    const response = await axios.post(`${import.meta.env.VITE_API_URL}/generate-qr/`, formData, {
       responseType: 'blob',
     })
+    console.log(response)
 
     qrUrl.value = URL.createObjectURL(response.data)
   } catch (error) {

@@ -78,7 +78,9 @@ async def generate_qr(data: str = Form(...), logo: UploadFile = None):
 
         qr_img.save(filename)
 
-        return FileResponse(filename, media_type="image/png", filename="qr-code.png")
+        respons = FileResponse(filename, media_type="image/png", filename="qr-code.png")
+        respons.headers["Access-Control-Allow-Origin"] = "https://zos-g.vercel.app"
+        return respons
     except Exception as e:
         print(e)
         return JSONResponse(content={"error": str(e)}, status_code=500)
