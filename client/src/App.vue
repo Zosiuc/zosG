@@ -8,7 +8,7 @@ const logoName = ref('')
 const data = ref('')
 const logo = ref<File | null>(null)
 const qrUrl = ref<string | null>(null)
-const error = ref<string | null>(null)
+const err = ref<string | null>(null)
 
 function onFileChange(event: Event) {
   const target = event.target as HTMLInputElement
@@ -41,20 +41,20 @@ async function generateQr() {
         const blob = error.response.data
         const text = await blob.text() // Lees de error als tekst
         console.error('Serverfout:', text)
-        error.value = `Fout van server: ${text}`
+        err.value = `Fout van server: ${text}`
       } else {
         // Verbindingsfout of iets anders
         console.error('Verbindingsfout of onbekende fout:', error.message)
-        error.value = `Verbindingsfout: ${error.message}`
+        err.value = `Verbindingsfout: ${error.message}`
       }
     } else {
       console.error('Onbekende fout:', error)
-      error.value = `Er is een onbekende fout opgetreden.`
+      err.value = `Er is een onbekende fout opgetreden.`
       alert('Er is een onbekende fout opgetreden.')
 
     }
   } finally {
-    error.value = null
+    err.value = null
     wait.value = false
   }
 }
@@ -110,8 +110,8 @@ async function generateQr() {
         </button>
       </form>
     </div>
-    <div v-if="error" class=" mt-6 text-red-50 text-center z-100 max-h-lvh p-6 flex flex-col items-center justify-center   bg-white/25 backdrop-blur-xl">
-      <strong  v-text="error"></strong>
+    <div v-if="err" class=" mt-6 text-red-50 text-center z-100 max-h-lvh p-6 flex flex-col items-center justify-center   bg-white/25 backdrop-blur-xl">
+      <strong  v-text="err"></strong>
     </div>
 
     <div v-if="qrUrl" class=" mt-6 text-center z-100 max-h-lvh p-6 flex flex-col items-center justify-center   bg-white/25 backdrop-blur-xl">
