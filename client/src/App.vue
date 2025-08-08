@@ -62,9 +62,9 @@ async function generateQr() {
 </script>
 
 <template>
-  <div class="">
-    <div class="bg-gray-100 min-h-lvh -z-10 absolute top-0 left-0 w-[100vw] flex justify-center items-center">
-      <img src="./assets/Icon.svg" alt="logo" class=" blur-xl w-1/2"/>
+  <div class=" bg-gray-100 ">
+    <div class="min-h-lvh white/10   absolute top-0 left-0 w-[100vw] flex justify-center items-start pt-40">
+      <img src="./assets/Icon.svg" alt="logo" class="blur-md  w-1/2"/>
     </div>
 
     <div
@@ -74,7 +74,7 @@ async function generateQr() {
         <input
             type="text"
             v-model="data"
-            placeholder="Voer tekst of URL in"
+            placeholder="Input any text or web address"
             class="w-full border p-2 rounded"
             required
         />
@@ -114,7 +114,7 @@ async function generateQr() {
       <strong  v-text="err"></strong>
     </div>
 
-    <div v-if="qrUrl" class=" mt-6 text-center z-100 max-h-lvh p-6 flex flex-col items-center justify-center   bg-white/25 backdrop-blur-xl">
+    <div v-if="qrUrl" class=" mt-10 text-center z-100 max-h-lvh p-6 flex flex-col items-center justify-center   bg-white/25 backdrop-blur-xl">
       <h2 class="mb-2 font-semibold">QR-code:</h2>
       <img :src="qrUrl" alt="QR Code" class="border rounded-xl"/>
       <a :href="qrUrl" download="qr-code.png" class="mt-6 inline-block text-gray-600 border p-1 px-3 rounded-2xl">
