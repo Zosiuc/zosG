@@ -115,7 +115,7 @@ async function generateQr() {
       <strong  v-text="err"></strong>
     </div>
 
-    <div v-if="qrUrl" class=" mt-10 text-center z-100 max-h-lvh p-6 flex flex-col items-center justify-center   bg-white/25 backdrop-blur-xl">
+    <div v-if="qrUrl" class=" mt-10 text-center z-1000 max-h-lvh p-6 flex flex-col items-center justify-center   bg-white/25 backdrop-blur-xl">
       <h2 class="mb-2 font-semibold">QR-code:</h2>
       <img :src="qrUrl" alt="QR Code" class="border rounded-xl"/>
       <a :href="qrUrl" download="qr-code.png" class="mt-6 inline-block text-gray-600 border p-1 px-3 rounded-2xl">
