@@ -30,7 +30,7 @@ async function generateQr() {
   if (logo.value) formData.append('logo', logo.value)
 
   try {
-    const response = await axios.post(`${apiUrl}`, formData, {
+    const response = await axios.post(`${apiUrl}/generate-qr/`, formData, {
       responseType: 'blob',
     })
 
@@ -60,8 +60,11 @@ async function generateQr() {
 </script>
 
 <template>
-  <img src="../public/icon.png" alt="logo" class="-z-10 absolute top-20 left-[15%] w-[70vw] blur-md" />
-  <div class="z-100 min-h-screen w-[80vw]  flex flex-col items-center justify-start pt-60 p-6 bg-white/10 backdrop-blur-lg">
+  <div class="bg-gray-100 min-h-lvh -z-10 absolute top-0 left-0 w-[100vw] flex justify-center items-center"> >
+    <img src="../public/icon.png" alt="logo" class=" blur-xl w-2/3" />
+  </div>
+
+  <div class="z-100 max-h-lvh  w-[80vw]  flex flex-col items-center justify-start pt-60 p-6 bg-white/25 backdrop-blur-xl">
     <h1 class="text-2xl font-bold mb-4">QR-code Generator</h1>
     <form @submit.prevent="generateQr" class="flex flex-col j gap-10 space-y-4 w-full max-w-sm">
       <input
@@ -105,7 +108,7 @@ async function generateQr() {
     <div v-if="qrUrl" class=" mt-6 text-center">
       <h2 class="mb-2 font-semibold">QR-code:</h2>
       <img :src="qrUrl" alt="QR Code" class="border rounded-xl" />
-      <a :href="qrUrl" download="qr-code.png" class="mt-2 inline-block text-blue-600 underline">
+      <a :href="qrUrl" download="qr-code.png" class="mt-2 inline-block text-gray-600 border p-1 px-3 rounded-2xl">
         Download
       </a>
     </div>
