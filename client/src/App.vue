@@ -64,7 +64,7 @@ async function generateQr() {
 
 <template>
   <div class=" bg-gray-100 ">
-    <div class="min-h-lvh white/10 z-0  absolute top-0 left-0 w-[100vw] flex justify-center items-start pt-40">
+    <div class="min-h-lvh white/10 -z-1  absolute top-0 left-0 w-[100vw] flex justify-center items-start pt-40">
       <img src="./assets/Icon.svg" alt="logo" class="blur-md  w-1/2"/>
     </div>
 
