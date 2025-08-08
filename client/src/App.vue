@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {ref} from 'vue'
 import axios from 'axios'
+import { Analytics } from "@vercel/analytics/next"
 
 
 const wait = ref<boolean>(false)
@@ -122,6 +123,7 @@ async function generateQr() {
       </a>
     </div>
   </div>
+  <Analytics/>
 </template>
 
 
