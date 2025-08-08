@@ -15,12 +15,17 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
-        "https://zos-8gweknuj3-zodiucs-projects.vercel.app"
+        "https://zos-g.vercel.app"
     ],
     allow_credentials=True,
-    allow_methods=["POST"],
+    allow_methods=["POST", "GET"],
     allow_headers=["*"],
 )
+
+
+@app.get("/")
+def root():
+    return {"message": "QR Code API is running"}
 
 
 @app.post("/generate-qr/")
