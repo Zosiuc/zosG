@@ -2,6 +2,9 @@
 import { ref } from 'vue'
 import axios from 'axios'
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
+
 const wait = ref<boolean>(false)
 const logoName = ref('')
 const data = ref('')
@@ -27,7 +30,7 @@ async function generateQr() {
   if (logo.value) formData.append('logo', logo.value)
 
   try {
-    const response = await axios.post('http://localhost:8000/generate-qr/', formData, {
+    const response = await axios.post(`${apiUrl}`, formData, {
       responseType: 'blob',
     })
 
@@ -57,8 +60,8 @@ async function generateQr() {
 </script>
 
 <template>
-  <img src="../public/icon.png" alt="logo" class="absolute top-20 left-[20%] w-[60vw]">
-  <div class="min-h-screen w-[80vw]  flex flex-col items-center justify-start pt-60 p-6 bg-white/10 backdrop-blur-lg">
+  <img src="../public/icon.png" alt="logo" class="absolute top-20 left-[15%] w-[70vw]" zIndex="-1" />
+  <div class="z-10 min-h-screen w-[80vw]  flex flex-col items-center justify-start pt-60 p-6 bg-white/10 backdrop-blur-lg">
     <h1 class="text-2xl font-bold mb-4">QR-code Generator</h1>
     <form @submit.prevent="generateQr" class="flex flex-col j gap-10 space-y-4 w-full max-w-sm">
       <input
