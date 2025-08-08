@@ -63,13 +63,13 @@ async function generateQr() {
 </script>
 
 <template>
-  <div class=" bg-gray-100 ">
-    <div class="min-h-lvh white/10 -z-1  absolute top-0 left-0 w-[100vw] flex justify-center items-start pt-40">
-      <img src="./assets/Icon.svg" alt="logo" class="blur-md  w-1/2"/>
+  <div class="  ">
+    <div class="min-h-lvh white/10 -z-10  absolute top-0 left-0 w-[100vw] flex justify-center items-start pt-40">
+      <img src="./assets/Icon.svg" alt="logo" class="blur-xl  w-1/2"/>
     </div>
 
     <div
-        class="z-100 max-h-lvh p-6 flex flex-col items-center justify-center   bg-white/25 backdrop-blur-xl">
+        class="z-1000 max-h-lvh p-6 flex flex-col items-center justify-center   bg-white/25 backdrop-blur-xl">
       <h1 class="text-2xl font-bold mb-4">QR-code Generator</h1>
       <form @submit.prevent="generateQr" class="flex flex-col j gap-10 space-y-4 w-full max-w-sm">
         <input
