@@ -2,7 +2,7 @@
 import {ref} from 'vue'
 import axios from 'axios'
 import {useI18n} from 'vue-i18n'
-import { event } from '@vercel/analytics'
+import event  from '@vercel/analytics'
 
 const {t} = useI18n()
 
