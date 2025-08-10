@@ -101,7 +101,7 @@ async function generateQr() {
         </div>
 
 
-        <button type="submit" @click="() => { event('button_click', { buttonName: 'generate' })}" class=" bg-blue-400 text-white px-4 py-2 rounded w-full">
+        <button type="submit" @click="() => { event.track('button_click', { buttonName: 'generate' })}" class=" bg-blue-400 text-white px-4 py-2 rounded w-full">
           <span v-if="wait">{{t('waiting')}}</span>
           <span v-if="!wait">{{t('generate')}}</span>
         </button>
