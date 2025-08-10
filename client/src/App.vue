@@ -1,128 +1,74 @@
-<script setup lang="ts">
-import {ref} from 'vue'
-import axios from 'axios'
+<script setup lang="ts" >
+import { useI18n } from 'vue-i18n'
+import { watch } from 'vue'
+const { t, locale } = useI18n()
 
+import facebook from "/facebook.png"
+import x from "/twitter.png"
+import linkedIn from "/linkedin.png"
+import whatsapp from "/whatsapp.png"
+import email from "/mail.png"
+import faceLogo from "/faceLogo.svg"
 
-
-const wait = ref<boolean>(false)
-const logoName = ref('')
-const data = ref('')
-const logo = ref<File | null>(null)
-const qrUrl = ref<string | null>(null)
-const err = ref<string | null>(null)
-
-function onFileChange(event: Event) {
-  const target = event.target as HTMLInputElement
-  if (target.files?.length) {
-    const file = target.files[0]
-    if (file) {
-      logoName.value = file.name
-      logo.value = file
-    }
-  }
-}
-
-async function generateQr() {
-  wait.value = true
-  const formData = new FormData()
-  formData.append('data', data.value)
-  if (logo.value) formData.append('logo', logo.value)
-
-  try {
-    const response = await axios.post(`${import.meta.env.VITE_API_URL}/generate-qr/`, formData, {
-      responseType: 'blob',
-    })
-
-
-    qrUrl.value = URL.createObjectURL(response.data)
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      if (error.response) {
-        // Server gaf een fout terug (4xx of 5xx)
-        const blob = error.response.data
-        const text = await blob.text() // Lees de error als tekst
-        console.error('Serverfout:', text)
-        err.value = `Fout van server: ${text}`
-      } else {
-        // Verbindingsfout of iets anders
-        console.error('Verbindingsfout of onbekende fout:', error.message)
-        err.value = `Verbindingsfout: ${error.message}`
-      }
-    } else {
-      console.error('Onbekende fout:', error)
-      err.value = `Er is een onbekende fout opgetreden.`
-      alert('Er is een onbekende fout opgetreden.')
-
-    }
-  } finally {
-    err.value = null
-    wait.value = false
-  }
-}
+watch(locale, (newLocale) => {
+  document.documentElement.dir = newLocale === 'ar' ? 'rtl' : 'ltr'
+}, { immediate: true })
 
 </script>
+<template >
 
-<template>
-  <div class="  ">
-    <div class="min-h-lvh white/10 -z-10  absolute top-0 left-0 w-[100vw] flex justify-center items-start pt-40">
-      <img src="./assets/Icon.svg" alt="logo" class="blur-xl  w-1/2"/>
-    </div>
+  <div class=" ">
+    <img src="./assets/zosiucIcon.svg" alt="logo" class="-z-10  min-h-dvh  absolute top-40 left-0 blur-2xl "/>
+    <nav class=" z-10 p-4 px-6 flex justify-between fixed top-0 left-0 w-full z-1000 bg-white/75 backdrop-blur-xl  gap-6">
+      <div class="flex gap-6 items-center justify-center">
+      <router-link to="/" class="text-gray-800 text-xl">{{t('home')}} |</router-link>
+      <router-link to="/qr" class="text-gray-800  flex items-center">{{t('QR-generator')}}</router-link>
 
-    <div
-        class="z-1000 max-h-lvh p-6 flex flex-col items-center justify-center   bg-white/25 backdrop-blur-xl">
-      <h1 class="text-2xl font-bold mb-4">QR-code Generator</h1>
-      <form @submit.prevent="generateQr" class="flex flex-col j gap-10 space-y-4 w-full max-w-sm">
-        <input
-            type="text"
-            v-model="data"
-            placeholder="Input any text or web address"
-            class="w-full border p-2 rounded"
-            required
-        />
-        <div class="flex flex-col gap-2 bg-blue-100 p-4 rounded-md w-full max-w-sm">
-          <label class="text-sm font-medium" for="logo">Optional: Upload your logo to include it in your QR
-            code.</label>
+      </div>
 
-          <!-- Verborgen input -->
-          <input
-              id="logo"
-              type="file"
-              accept="image/*"
-              @change="onFileChange"
-              class="hidden"
-          />
+      <div>
+      <select v-model="locale" class="rounded-2xl bg-blue-400  text-xs h-8 text-white flex items-center">
+        <option value="en" class="">{{t('english')}}</option>
+        <option value="nl">{{t('dutch')}}</option>
+        <option value="ar">{{t('arabic')}}</option>
+      </select>
+      </div>
+    </nav>
 
-          <!-- Custom label as button -->
-          <label
-              for="logo"
-              class="cursor-pointer inline-block bg-blue-400 hover:bg-blue-500 text-white text-sm font-semibold py-2 px-4 rounded-md text-center"
-          >
-            Choose Logo
-          </label>
+    <router-view class="py-60 " />
 
-          <!-- Toon bestandsnaam als gekozen -->
-          <span v-if="logoName" class="text-sm text-blue-950 truncate">Selected: {{ logoName }}</span>
-        </div>
-
-
-        <button type="submit" class=" bg-blue-400 text-white px-4 py-2 rounded w-full">
-          <span v-if="wait">waiting...</span>
-          <span v-if="!wait">Genereer QR-code</span>
-        </button>
-      </form>
-    </div>
-    <div v-if="err" class=" mt-6 text-red-50 text-center z-100 max-h-lvh p-6 flex flex-col items-center justify-center   bg-white/25 backdrop-blur-xl">
-      <strong  v-text="err"></strong>
-    </div>
-
-    <div v-if="qrUrl" class=" mt-10 text-center z-1000 max-h-lvh p-6 flex flex-col items-center justify-center   bg-white/25 backdrop-blur-xl">
-      <h2 class="mb-2 font-semibold">QR-code:</h2>
-      <img :src="qrUrl" alt="QR Code" class="border rounded-xl"/>
-      <a :href="qrUrl" download="qr-code.png" class="mt-6 inline-block text-gray-600 border p-1 px-3 rounded-2xl">
-        Download
-      </a>
-    </div>
+    <footer class="bg-white/5 backdrop-blur-xl  p-3 fixed  bottom-0 left-0 w-full flex flex-col justify-center items-center gap-6">
+      <div class="text-2xl text-gray-500">
+        <strong><i>{{t('Powered-by')}}</i></strong>
+        <a href="https://zosiuc.dev" target="_blank">
+          <img :src="faceLogo" alt="zosiuc logo">
+        </a>
+      </div>
+      <div class="flex flex-row gap-7" >
+        <a rel="Facebook"
+           href="https://www.facebook.com/profile.php?id=61576998966697&__cft__[0]=AZUOQUgLH-NllXVGLhuGpBVf-6JoQbW_sb7iFNrs559L7O7cE1RlIbv5wQaH-_VtAdWGo1GT7BvdF-aalEhk4nh__RjPUfpfyKI_6ohmf6G2RXzF6IhW9rvjQbQHK-d0CixwMAnmieRIVGlBWQtVuVb8BnQK5DrEjIg172fGCELyCA&__tn__=-]K-R"
+           target="_blank">
+          <img :src="facebook" alt="facebook" class="w-6" />
+        </a>
+        <a rel="X" href="https://x.com/ZosiucDev" target="_blank">
+          <img :src="x" alt="x" class="w-6" />
+        </a>
+        <a rel="linkedin" href="https://www.linkedin.com/company/zosiuc" target="_blank">
+          <img :src="linkedIn" alt="linkedIn" class="w-6"  />
+        </a>
+        <a rel="whatsapp" href="https://wa.me/31649268880" target="_blank">
+          <img :src="whatsapp" alt="linkedIn" class="w-6" />
+        </a>
+        <a
+            rel="email"
+            href="mailto:info@zosiuc.dev?subject=Inquiry%20about%20your%20portfolio&body=Hello%2C%0D%0A%0D%0AMy%20name%20is%20[Your%20Name]%2C%20and%20I%20recently%20came%20across%20your%20portfolio.%0D%0A%0D%0AI%20have%20a%20few%20questions%20and%20would%20love%20to%20discuss%20them%20further%20if%20you%20have%20some%20time.%0D%0A%0D%0AThank%20you%20in%20advance%2C%0D%0A%0D%0ABest%20regards%2C%0D%0A[Your%20Name]"
+            target="_blank">
+          <img :src="email" alt="email" class="w-6" />
+        </a>
+      </div>
+      <div>
+        <p class="items-center" >{{t('copyR')}}</p>
+      </div>
+    </footer>
   </div>
 </template>
-
-
