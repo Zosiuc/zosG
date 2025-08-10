@@ -13,6 +13,13 @@ const logo = ref<File | null>(null)
 const qrUrl = ref<string | null>(null)
 const err = ref<string | null>(null)
 
+function scrollToElement(id: string) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
 function onFileChange(event: Event) {
   const target = event.target as HTMLInputElement
   if (target.files?.length) {
@@ -36,6 +43,10 @@ async function generateQr() {
     })
 
     qrUrl.value = URL.createObjectURL(response.data)
+    setTimeout(() => {
+      console.log('QR is successfully generated !');
+      scrollToElement('qr');
+    }, 1000);
   } catch (error) {
     if (axios.isAxiosError(error)) {
       if (error.response) {
@@ -58,13 +69,14 @@ async function generateQr() {
   } finally {
     err.value = null
     wait.value = false
+
   }
 }
 
 </script>
 
 <template>
-  <div class="flex flex-col w-[100vw] min-h-lvh py-40  items-center   text-center bg-gradient-to-b from-blue-200 via-white to-blue-50">
+  <div class="flex flex-col  w-[100vw] min-h-lvh py-40  items-center   text-center bg-gradient-to-b from-blue-200 via-white to-blue-50">
     <div
         class=" max-h-lvh p-6 flex flex-col items-center justify-center  bg-white/25 backdrop-blur-xl">
       <h1 class="text-2xl font-bold mb-4">{{t('title')}}</h1>
@@ -111,7 +123,7 @@ async function generateQr() {
       <strong  v-text="err"></strong>
     </div>
 
-    <div v-if="qrUrl" class=" mt-10 text-center z-1000  p-6 flex flex-col items-center justify-center   bg-white/25 backdrop-blur-xl">
+    <div id="qr" v-if="qrUrl" class=" mt-10 text-center z-1000  p-6 flex flex-col items-center justify-center   bg-white/25 backdrop-blur-xl">
       <h2 class="mb-2 font-semibold">{{t('QR-code')}}:</h2>
       <img :src="qrUrl" alt="QR Code" class="border rounded-xl"/>
       <a :href="qrUrl" download="qr-code.png" class="mt-6 inline-block text-gray-600 border p-1 px-3 rounded-2xl">
