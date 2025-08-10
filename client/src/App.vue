@@ -37,7 +37,7 @@ watch(locale, (newLocale) => {
 
     <router-view />
 
-    <footer class="bg-white/20 backdrop-blur-xl p-2  h-30 lg:h-10  w-full flex flex-col lg:flex-row justify-center items-center gap-6">
+    <footer class="z-1000 bg-white/25 backdrop-blur-xl p-2  h-30 lg:h-10  w-full flex flex-col lg:flex-row justify-center items-center gap-6">
       <div class="text-2xl lg:text-md text-gray-500 flex lg:items-center lg:gap-4 flex-col lg:flex-row lg:absolute left-20 bottom-2">
         <strong><i>{{t('Powered-by')}}</i></strong>
         <a href="https://zosiuc.dev" target="_blank">
