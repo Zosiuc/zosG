@@ -64,7 +64,7 @@ async function generateQr() {
 </script>
 
 <template>
-  <div class="">
+  <div class="flex flex-col w-[100vw] min-h-lvh py-40  items-center   text-center bg-gradient-to-b from-blue-200 via-white to-blue-50">
     <div
         class=" max-h-lvh p-6 flex flex-col items-center justify-center  bg-white/25 backdrop-blur-xl">
       <h1 class="text-2xl font-bold mb-4">{{t('title')}}</h1>
