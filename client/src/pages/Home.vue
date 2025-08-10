@@ -27,7 +27,7 @@ onMounted(() => {
   <section class="flex flex-col w-[100vw] min-h-lvh py-40  items-center   text-center bg-gradient-to-b from-blue-200 via-white to-blue-50">
     <!-- Hero section -->
     <h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-4">
-      {{t('Welcome')}} <span class="text-blue-500">ZosG</span>
+      {{t('welcome')}} <span class="text-blue-500">ZosG</span>
     </h1>
     <p class="max-w-2xl text-lg md:text-xl text-gray-600 mb-8">
       {{t('hero-p')}}
