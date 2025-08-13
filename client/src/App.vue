@@ -8,7 +8,7 @@ import x from "/twitter.png"
 import linkedIn from "/linkedin.png"
 import whatsapp from "/whatsapp.png"
 import email from "/mail.png"
-import faceLogo from "/faceLogo.svg"
+import zosiucLogo from "/zosiucLogo.png"
 
 watch(locale, (newLocale) => {
   document.documentElement.dir = newLocale === 'ar' ? 'rtl' : 'ltr'
@@ -37,11 +37,12 @@ watch(locale, (newLocale) => {
 
     <router-view />
 
-    <footer class="z-1000 bg-white/25 backdrop-blur-xl p-2  h-30 lg:h-10  w-full flex flex-col lg:flex-row justify-center items-center gap-6">
-      <div class="text-2xl lg:text-md text-gray-500 flex lg:items-center lg:gap-4 flex-col lg:flex-row lg:absolute left-20 bottom-2">
-        <strong><i>{{t('Powered-by')}}</i></strong>
-        <a href="https://zosiuc.dev" target="_blank">
-          <img :src="faceLogo" alt="zosiuc logo" class="lg:h-6">
+    <footer class="z-1000 bg-white/25 backdrop-blur-xl p-2  h-30 lg:h-10  w-full flex flex-col lg:flex-row justify-center items-center gap-1">
+      <div class="text-2xl lg:text-md text-gray-500  flex lg:items-center lg:gap-4 flex-col lg:flex-row lg:absolute  bottom-2">
+
+        <a href="https://zosiuc.dev" target="_blank" class="relative">
+          <strong class="absolute top-20 left-[70px]"><i>{{t('Powered-by')}}</i></strong>
+          <img :src="zosiucLogo" alt="zosiuc logo" class="lg:h-6 w-80">
         </a>
       </div>
       <div class="flex flex-row gap-7 lg:absolute right-20" >

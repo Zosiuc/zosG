@@ -51,9 +51,9 @@ async def generate_qr(data: str = Form(...), logo: UploadFile = None):
         if logo:
             contents = await logo.read()
             logo_img = Image.open(BytesIO(contents)).convert("RGBA")
-            size = int(new_img.size[0] * 0.25)
+            size = int(new_img.size[0] * 0.20)
 
-            scale = 0.6
+            scale = 1
             logo_inner_size = int(size * scale)
 
             logo_img = logo_img.resize((logo_inner_size, logo_inner_size))

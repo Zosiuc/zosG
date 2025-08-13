@@ -7,6 +7,7 @@ import { Analytics } from '@vercel/analytics/vue'
 
 
 
+
 import en from './locales/en.json'
 import nl from './locales/nl.json'
 import ar from './locales/ar.json'
