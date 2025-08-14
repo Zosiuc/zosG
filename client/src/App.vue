@@ -8,7 +8,7 @@ import x from "/twitter.png"
 import linkedIn from "/linkedin.png"
 import whatsapp from "/whatsapp.png"
 import email from "/mail.png"
-import zosiucLogo from "/zosiucLogo.png"
+const zosiucLogo = "https://zosiuc.dev/og-image-nb.png"
 
 watch(locale, (newLocale) => {
   document.documentElement.dir = newLocale === 'ar' ? 'rtl' : 'ltr'
@@ -37,14 +37,13 @@ watch(locale, (newLocale) => {
 
     <router-view />
 
-    <footer class="z-1000 bg-white/25 backdrop-blur-xl p-2  h-30 lg:h-10  w-full flex flex-col lg:flex-row justify-center items-center gap-1">
-      <div class="text-2xl lg:text-md text-gray-500  flex lg:items-center lg:gap-4 flex-col lg:flex-row lg:absolute  bottom-2">
+    <footer class="z-1000 bg-white/25 backdrop-blur-xl py-2   h-30 lg:h-10  w-full flex flex-col lg:flex-row justify-center items-center gap-1">
 
-        <a href="https://zosiuc.dev" target="_blank" class="relative">
-          <strong class="absolute top-20 left-[70px]"><i>{{t('Powered-by')}}</i></strong>
-          <img :src="zosiucLogo" alt="zosiuc logo" class="lg:h-6 w-80">
-        </a>
-      </div>
+      <a href="https://zosiuc.dev" target="_blank" class="text-sky-800 text-2xl lg:text-lg flex justify-center items-center  flex-col lg:flex-row gap-1 lg:absolute left-10  bottom-0">
+        <strong class="-ml-10 lg:ml-0"><i>{{t('Powered-by')}}</i></strong>
+        <img :src="zosiucLogo" alt="zosiuc logo" class="lg:h-13 lg:w-28 w-80">
+      </a>
+
       <div class="flex flex-row gap-7 lg:absolute right-20" >
         <a rel="Facebook"
            href="https://www.facebook.com/profile.php?id=61576998966697&__cft__[0]=AZUOQUgLH-NllXVGLhuGpBVf-6JoQbW_sb7iFNrs559L7O7cE1RlIbv5wQaH-_VtAdWGo1GT7BvdF-aalEhk4nh__RjPUfpfyKI_6ohmf6G2RXzF6IhW9rvjQbQHK-d0CixwMAnmieRIVGlBWQtVuVb8BnQK5DrEjIg172fGCELyCA&__tn__=-]K-R"
