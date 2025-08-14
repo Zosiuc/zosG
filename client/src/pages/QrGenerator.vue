@@ -46,7 +46,7 @@ async function generateQr() {
     setTimeout(() => {
       console.log('QR is successfully generated !');
       scrollToElement('qr');
-    }, 1000);
+    }, 100);
   } catch (error) {
     if (axios.isAxiosError(error)) {
       if (error.response) {

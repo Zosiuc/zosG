@@ -15,6 +15,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         "https://zos-g.vercel.app",
+        "https://zos-qczu6ekj2-zodiucs-projects.vercel.app",
         "https://zosg.zosiuc.dev"
     ],
     allow_credentials=True,
